@@ -1,0 +1,271 @@
+{
+  "name": "vtex-update-tracking-desktop",
+  "version": "1.0.3",
+  "description": "Dashboard desktop (Electron + React/Vite) para atualização automatizada de tracking na VTEX",
+  "main": "electron/main.js",
+  "author": {
+    "name": "Alberto Luiz",
+    "email": "alberto.dos.santos93@gmail.com"
+  },
+  "keywords": [
+    "Electron",
+    "Vite",
+    "React",
+    "VTEX",
+    "Dashboard",
+    "Tracking",
+    "Bisturi",
+    "Desktop App",
+    "Order Management"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/alberto2santos/update-tracking-batch",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alberto2santos/update-tracking-batch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alberto2santos/update-tracking-batch/issues",
+    "email": "alberto.dos.santos93@gmail.com"
+  },
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build:react": "vite build",
+    "build:electron": "electron-builder --win --x64",
+    "build": "npm run build:react && npm run build:electron",
+    "build:all": "npm run build:react && electron-builder --win --mac --linux",
+    "build:win": "npm run build:react && electron-builder --win",
+    "build:mac": "npm run build:react && electron-builder --mac",
+    "build:linux": "npm run build:react && electron-builder --linux",
+    "start": "electron .",
+    "clean": "rimraf dist dist_electron",
+    "rebuild": "npm run clean && npm run build",
+    "build-icons": "electron-icon-builder --input=./public/icons/icon.png --output=./public/icons --flatten",
+    "lint": "echo 'Linting not configured yet'",
+    "test": "echo 'Tests not configured yet'",
+    "devtools": "react-devtools",
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\"",
+    "type-check": "tsc --noEmit",
+    "analyze": "vite build --mode analyze",
+    "update-deps": "npm update && npm outdated",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "npm run build:react && electron-builder --dir",
+    "generate-icons": "node scripts/generate-icons.js",
+    "dist": "npm run build:react && electron-builder"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "axios-retry": "^4.5.0",
+    "csv-parse": "^5.6.0",
+    "dotenv": "^16.4.7",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.6.2",
+    "minimist": "^1.2.8",
+    "node-notifier": "^10.0.1",
+    "p-limit": "^6.1.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "electron": "^39.2.7",
+    "electron-builder": "^24.13.3",
+    "electron-devtools-installer": "^4.0.0",
+    "electron-icon-builder": "^2.0.1",
+    "prettier": "^3.7.4",
+    "react-devtools": "^7.0.1",
+    "rimraf": "^6.0.1",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "sharp": "^0.34.5",
+    "terser": "^5.44.1",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.11",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "publish": {
+      "provider": "github",
+      "owner": "alberto2santos",
+      "repo": "update-tracking-batch"
+    },
+    "productName": "VTEX Update Tracking",
+    "appId": "br.bisturi.vtex-update-tracking",
+    "copyright": "Copyright © 2024 Alberto Luiz",
+    "directories": {
+      "buildResources": "public/icons",
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/icons/**/*",
+      "update-invoice-tracking.js",
+      "package.json",
+      "node_modules/**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!node_modules/*.d.ts",
+      "!node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "extraResources": [
+      {
+        "from": "public/icons",
+        "to": "icons",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": ".env.example",
+        "to": ".env.example"
+      }
+    ],
+    "win": {
+      "icon": "public/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "publisherName": "Alberto Luiz",
+      "signAndEditExecutable": false,
+      "verifyUpdateCodeSignature": false,
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "VTEX Update Tracking",
+      "installerIcon": "public/icons/icon.ico",
+      "uninstallerIcon": "public/icons/icon.ico",
+      "installerHeaderIcon": "public/icons/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "menuCategory": true,
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "perMachine": false,
+      "installerLanguages": [
+        "pt_BR",
+        "en_US"
+      ],
+      "language": "1046"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}.${ext}"
+    },
+    "mac": {
+      "icon": "public/icons/icon.icns",
+      "category": "public.app-category.business",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "title": "${productName} ${version}",
+      "icon": "public/icons/icon.icns",
+      "background": "build/background.png",
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "linux": {
+      "icon": "public/icons/icon.png",
+      "category": "Office",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "desktop": {
+        "Name": "VTEX Update Tracking",
+        "Comment": "Dashboard para atualização de tracking na VTEX",
+        "Categories": "Office;Business;",
+        "StartupNotify": "true"
+      }
+    },
+    "compression": "maximum",
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/sharp/**/*",
+      "**/node_modules/@img/**/*",
+      "public/icons/**/*"
+    ]
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}

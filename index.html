@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dashboard desktop para atualizar rastreio e marcar entrega de pedidos na VTEX" />
+    <meta name="author" content="Alberto Luiz" />
+    <meta name="keywords" content="VTEX, Rastreio, Tracking, Pedidos, Bisturi, Dashboard" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://github.com/alberto2santos/update-tracking-batch" />
+    <meta property="og:title" content="VTEX Update Tracking - Dashboard Desktop" />
+    <meta property="og:description" content="Dashboard desktop para atualizar rastreio e marcar entrega de pedidos na VTEX" />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://github.com/alberto2santos/update-tracking-batch" />
+    <meta property="twitter:title" content="VTEX Update Tracking - Dashboard Desktop" />
+    <meta property="twitter:description" content="Dashboard desktop para atualizar rastreio e marcar entrega de pedidos na VTEX" />
+    <meta property="twitter:image" content="/icons/icon-512x512.png" />
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline';
+      font-src 'self' data:;
+      img-src 'self' data: https:;
+      connect-src 'self' http://localhost:5173 ws://localhost:5173;
+    ">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-256x256.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="./src/public/manifest.json" />
+       
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#667eea" />
+    
+    <title>VTEX Update Tracking</title>
+    
+    <style>
+      /* Loading Screen */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+      }
+      
+      #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .loading-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        animation: bounce 1s infinite;
+      }
+      
+      .loading-text {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        margin-bottom: 0.5rem;
+      }
+      
+      .loading-version {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        margin-bottom: 1rem;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Body Font Fallback */
+      body {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Noscript -->
+    <noscript>
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, sans-serif;
+        text-align: center;
+        padding: 2rem;
+      ">
+        <div>
+          <h1 style="color: #667eea; margin-bottom: 1rem;">⚠️ JavaScript Necessário</h1>
+          <p style="color: #666;">Esta aplicação requer JavaScript para funcionar.</p>
+          <p style="color: #666;">Por favor, habilite JavaScript no seu navegador.</p>
+        </div>
+      </div>
+    </noscript>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="loading-icon">📦</div>
+      <div class="loading-text">VTEX Update Tracking</div>
+      <div class="loading-version">v1.0.3</div>
+      <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- React Root -->
+    <div id="root"></div>
+    
+    <!-- Main Script -->
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Remove Loading Screen -->
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loadingScreen = document.getElementById('loading-screen');
+          if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            setTimeout(() => loadingScreen.remove(), 300);
+          }
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

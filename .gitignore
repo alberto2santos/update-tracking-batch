@@ -1,0 +1,306 @@
+# ============================================
+# VTEX Update Tracking - .gitignore
+# ============================================
+
+# ============================================
+# VARIÁVEIS DE AMBIENTE E CREDENCIAIS
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+
+# Exceção: manter template
+!.env.example
+
+# ============================================
+# NODE MODULES
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# LOGS DE PROCESSAMENTO
+# ============================================
+# Logs CSV gerados pelo script
+success_update_tracking*.csv
+error_update_tracking*.csv
+
+# Logs gerais
+*.log
+logs/
+*.log.*
+
+# ============================================
+# BUILDS E DISTRIBUIÇÃO
+# ============================================
+# Build do Vite (React)
+dist/
+dist-ssr/
+
+# Build do Electron
+dist_electron/
+out/
+release/
+
+# Build temporário
+.vite/
+.cache/
+
+# ============================================
+# ELECTRON
+# ============================================
+# Electron Builder
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.AppImage
+*.exe
+*.zip
+*.tar.gz
+*.snap
+
+# Electron cache
+.electron/
+electron-builder.yml
+
+# ============================================
+# ARQUIVOS TEMPORÁRIOS
+# ============================================
+# Uploads temporários
+uploads/
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Arquivos de teste
+test-*.txt
+test-*.csv
+pedidos-teste.txt
+
+# ============================================
+# SISTEMA OPERACIONAL
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================
+# IDEs E EDITORES
+# ============================================
+# VSCode
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+
+# JetBrains (WebStorm, IntelliJ, etc)
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.sw?
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================
+# DEPENDÊNCIAS E CACHE
+# ============================================
+# npm
+package-lock.json.bak
+.npm/
+
+# Yarn
+.yarn/
+.yarn-integrity
+yarn.lock.bak
+
+# pnpm
+.pnpm-store/
+
+# Electron Store (dados persistentes do app)
+# Descomentar se não quiser versionar configurações salvas
+# electron-store/
+
+# ============================================
+# TESTES
+# ============================================
+coverage/
+.nyc_output/
+*.lcov
+.coverage/
+htmlcov/
+
+# ============================================
+# ARQUIVOS DE BACKUP
+# ============================================
+*.bak
+*.backup
+*.old
+*-backup.*
+*-old.*
+
+# ============================================
+# CERTIFICADOS E CHAVES
+# ============================================
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+certs/
+certificates/
+
+# ============================================
+# DADOS SENSÍVEIS
+# ============================================
+# Credenciais VTEX
+vtex-credentials.json
+api-keys.json
+
+# Tokens
+*.token
+tokens/
+
+# Senhas
+passwords.txt
+credentials.txt
+
+# ============================================
+# ARQUIVOS ESPECÍFICOS DO PROJETO
+# ============================================
+# Arquivos de input grandes
+pedidos.txt
+pedidos.csv
+rastreios.txt
+orderIds.txt
+
+# Relatórios
+relatorios/
+reports/
+
+# ============================================
+# SCREENSHOTS E IMAGENS
+# ============================================
+# Screenshots na raiz e docs
+screenshots/
+/*.png
+/*.jpg
+/*.jpeg
+docs/**/*.png
+docs/**/*.jpg
+
+# Exceções: manter ícones do app
+!public/icons/**
+
+# ============================================
+# OUTROS
+# ============================================
+# Arquivos compactados (já listados acima em Electron)
+# *.zip
+# *.rar
+# *.7z
+# *.tar
+# *.gz
+
+# Arquivos de lock (exceto package-lock.json principal)
+*.lock
+!package-lock.json
+
+# TypeScript (se adicionar futuramente)
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# Stylelint cache
+.stylelintcache
+
+# Turbo cache
+.turbo/
+
+# Vercel
+.vercel
+
+# Next.js (caso expanda o projeto)
+.next/
+next-env.d.ts
+
+# Nuxt.js (caso expanda o projeto)
+.nuxt/
+.output/
+
+# ============================================
+# CONFIGURAÇÕES LOCAIS
+# ============================================
+# Configurações locais do desenvolvedor
+.local/
+local.config.js
+config.local.js
+
+# ============================================
+# DOCUMENTAÇÃO GERADA
+# ============================================
+docs/build/
+site/
+
+# ============================================
+# MONOREPO (se aplicável)
+# ============================================
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# ============================================
+# BACKUP AUTOMÁTICO DO HISTÓRICO
+# ============================================
+# Backups automáticos criados pelo app
+**/backups/history_auto_*.json
+**/backups/history_backup_*.json
