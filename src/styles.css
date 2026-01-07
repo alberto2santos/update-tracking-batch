@@ -4817,7 +4817,8 @@ button { cursor: pointer; border: none; background: none; }
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .app-main {
@@ -4827,8 +4828,30 @@ button { cursor: pointer; border: none; background: none; }
   flex: 1;
   padding: 1.5rem;
   max-width: 1400px;
+   max-height: 100%;
   margin: 0 auto;
   width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.app-main::-webkit-scrollbar {
+  width: 10px;
+}
+
+.app-main::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 5px;
+}
+
+.app-main::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.app-main::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
 }
 
 /* Badge Count no Botão Histórico */

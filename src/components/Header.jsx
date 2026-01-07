@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import logo from '/images/icon-vtex-home.png';
 
 /**
  * Cabeçalho da aplicação
@@ -51,7 +52,7 @@ function Header({
 
     return (
       <img 
-        src="/images/icon-vtex-home.png" 
+        src={logo}
         alt="Ícone VTEX" 
         title="VTEX Update Tracking" 
         width={50}

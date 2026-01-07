@@ -1,6 +1,6 @@
 {
   "name": "vtex-update-tracking-desktop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Dashboard desktop (Electron + React/Vite) para atualização automatizada de tracking na VTEX",
   "main": "electron/main.js",
   "author": {
@@ -98,7 +98,7 @@
     "appId": "br.bisturi.vtex-update-tracking",
     "copyright": "Copyright © 2024 Alberto Luiz",
     "directories": {
-      "buildResources": "public/icons",
+      "buildResources": "public",
       "output": "dist_electron"
     },
     "files": [
@@ -124,36 +124,46 @@
       {
         "from": "public/icons",
         "to": "icons",
-        "filter": [
-          "**/*"
-        ]
+        "filter": ["**/*"]
+      },
+      {
+        "from": "public/images",
+        "to": "images",
+        "filter": ["**/*"]
       },
       {
         "from": ".env.example",
         "to": ".env.example"
+      },
+      {
+        "from": ".env",
+        "to": ".env"
       }
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "update-invoice-tracking.js",
+      "**/node_modules/sharp/**/*",
+      "public/icons/**/*"
     ],
     "win": {
       "icon": "public/icons/icon.ico",
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         },
         {
           "target": "portable",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         }
       ],
       "artifactName": "${productName}-Setup-${version}.${ext}",
       "publisherName": "Alberto Luiz",
       "signAndEditExecutable": false,
       "verifyUpdateCodeSignature": false,
-      "requestedExecutionLevel": "asInvoker"
+      "requestedExecutionLevel": "asInvoker",
+      "legalTrademarks": "VTEX Update Tracking"
     },
     "nsis": {
       "oneClick": false,
@@ -162,19 +172,18 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "VTEX Update Tracking",
-      "installerIcon": "public/icons/icon.ico",
-      "uninstallerIcon": "public/icons/icon.ico",
-      "installerHeaderIcon": "public/icons/icon.ico",
+      "installerIcon": "icons/icon.ico",
+      "uninstallerIcon": "icons/icon.ico",
+      "installerHeaderIcon": "icons/icon.ico",
       "deleteAppDataOnUninstall": false,
       "runAfterFinish": true,
       "menuCategory": true,
       "artifactName": "${productName}-Setup-${version}.${ext}",
       "perMachine": false,
-      "installerLanguages": [
-        "pt_BR",
-        "en_US"
-      ],
-      "language": "1046"
+      "installerLanguages": ["pt_BR", "en_US"],
+      "language": "1046",
+      "warningsAsErrors": false,
+      "displayLanguageSelector": false
     },
     "portable": {
       "artifactName": "${productName}-Portable-${version}.${ext}"
@@ -185,17 +194,11 @@
       "target": [
         {
           "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
+          "arch": ["x64", "arm64"]
         },
         {
           "target": "zip",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
+          "arch": ["x64", "arm64"]
         }
       ],
       "artifactName": "${productName}-${version}-${arch}.${ext}",
@@ -206,47 +209,21 @@
     },
     "dmg": {
       "contents": [
-        {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
-        }
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
       ],
       "title": "${productName} ${version}",
       "icon": "public/icons/icon.icns",
       "background": "build/background.png",
-      "window": {
-        "width": 540,
-        "height": 380
-      }
+      "window": { "width": 540, "height": 380 }
     },
     "linux": {
       "icon": "public/icons/icon.png",
       "category": "Office",
       "target": [
-        {
-          "target": "AppImage",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "deb",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "rpm",
-          "arch": [
-            "x64"
-          ]
-        }
+        { "target": "AppImage", "arch": ["x64"] },
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "rpm", "arch": ["x64"] }
       ],
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "desktop": {
@@ -256,13 +233,7 @@
         "StartupNotify": "true"
       }
     },
-    "compression": "maximum",
-    "asar": true,
-    "asarUnpack": [
-      "**/node_modules/sharp/**/*",
-      "**/node_modules/@img/**/*",
-      "public/icons/**/*"
-    ]
+    "compression": "maximum"
   },
   "engines": {
     "node": ">=16.0.0",
